@@ -104,6 +104,20 @@
         section h2 a::after {
             display: none;
         }
+        /* Add paragraph spacing to prevent visual merging */
+        section p {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+        /* Make sure the last paragraph doesn't have extra bottom margin */
+        section p:last-child {
+            margin-bottom: 0;
+        }
+        /* Add a subtle visual separator between paragraphs */
+        section p + p {
+            padding-top: 5px;
+        }
         footer {
             background: linear-gradient(135deg, #333 0%, #444 100%);
             color: white;
