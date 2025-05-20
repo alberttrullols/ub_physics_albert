@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computational Physics Projects at UB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 65%;
+            margin: 0 auto;
+            padding: 20px 30px;
+            text-align: justify;
+        }
+        header {
+            background-color: #005bbb;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        section {
+            padding: 20px 0;
+            text-align: justify;
+            margin-bottom: 50px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+        section h2 {
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .side-by-side {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .side-by-side img {
+            width: 48%;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .video-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .video-container video {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Computational Physics Projects at UB</h1>
+        <p>Albert Trullols Puigcerver</p>
+    </header>
+    
+    <div class="container">
+        <section id="about">
+            <p>This page presents a compilation of computational physics projects developed during the BSc program at Universitat de Barcelona. These projects demonstrate various applications of computational methods to solve physics problems. The main repository can be accessed <a href="https://github.com/alberttrullols/ub_physics_albert" target="_blank">here</a>.</p>
+        </section>
+        
+        <section id="gaussian-zeno">
+            <h2>Gaussian Zeno Dynamics with Crank-Nicolson Method</h2>
+            <p>This project explores the quantum Zeno effect using Gaussian measurements and implements numerical solutions with the Crank-Nicolson method. The implementation demonstrates how repeated measurements affect the evolution of quantum systems, providing insights into the interplay between quantum measurement and dynamics.</p>
+            
+            <p>The Quantum Zeno Effect describes the inhibition of quantum state transitions through frequent measurements, effectively freezing the system's evolution in the limit of continuous observation. Quantum Zeno Dynamics generalizes this concept by restricting the evolution to a specific subspace of the Hilbert space. This work explores these dynamics under repeated position and momentum measurements. Position measurements lead to confinement effects, while momentum measurements give rise to a novel phenomenon: equipotential translocation, wherein the wave packet appears to "jump" between regions of equal potential.</p>
+            
+            <div class="video-container">
+                <video controls loop width="100%">
+                    <source src="content/transloc_1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p><em>Demonstration of quantum wave packet evolution under repeated momentum measurements, showing the equipotential translocation phenomenon.</em></p>
+            </div>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/bsc_thesis_zeno_dynamics/zeno_momentum_snippet.ipynb" target="_blank">click here</a> to see a snippet of the code for this quantum Zeno dynamics simulation.</p>
+        </section>
+        
+        <section id="ising-model">
+            <h2>2D Ising Model with Monte Carlo Method</h2>
+            <p>A simulation of the 2D Ising model is implemented using Monte Carlo methods to study phase transitions in ferromagnetic systems. The simulation allows for visualization of domain formation and calculation of critical parameters.</p>
+            
+            <p>Statistical analysis is performed to extract meaningful thermodynamic quantities from raw Monte Carlo data. After allowing the system to equilibrate, measurements are taken periodically to reduce autocorrelation effects. For each measurement, the instantaneous energy, magnetization, and their squares are calculated to enable variance calculations. Multiple independent simulations with different random seeds are run to improve statistical reliability.</p>
+            
+            <p>Data processing involves multiple averaging steps: first over measurement samples within each simulation run, then across all independent runs. All quantities are normalized on a per-particle basis. Energy and magnetization variances, which are proportional to heat capacity and magnetic susceptibility respectively, show characteristic behavior near the critical temperature. These thermodynamic observables allow for detailed analysis of the phase transition behavior.</p>
+            
+            <div class="image-container">
+                <img src="content/finite_size_scaling.png" alt="Finite Size Scaling Analysis of the Ising Model">
+                <p><em>Magnetic susceptibility against temperature for the 2D Ising model, with both quantities scaled for dimensionality. The collapse into one unique profile demonstrates the universal critical behavior across different system sizes.</em></p>
+            </div>
+        </section>
+        
+        <section id="gross-pitaevskii">
+            <h2>Gross Pitaevskii Equation with Imaginary Time Method</h2>
+            <p>This project presents a numerical framework to investigate quantum many-body physics in Bose-Einstein condensates through solutions of the Gross-Pitaevskii equation. The implementation uses imaginary time propagation to determine ground state wavefunctions across diverse trapping geometries. The solver explores how condensate properties evolve under varying interaction regimes, from weakly interacting gases to strongly nonlinear systems.</p>
+            
+            <p>The simulation captures quantum effects including matter-wave interference, quantized vortices, and soliton formation. Computational methods ensure numerical stability and accuracy throughout the evolution. Through visualizations of probability densities and phase profiles, the project demonstrates condensate behavior in optical lattices, quantum tunneling across barriers, and the effects of disorder potentials on superfluidity. This approach illuminates fundamental quantum physics principles while providing a platform for modeling quantum technology applications.</p>
+            
+            <div class="image-container">
+                <div class="side-by-side">
+                    <img src="content/gp100.png" alt="Gross-Pitaevskii Solution for N=100">
+                    <img src="content/gp100000.png" alt="Gross-Pitaevskii Solution for N=100000">
+                </div>
+                <p><em>Probability density of the Bose-Einstein condensate wavefunction. Left: system with N = 100 particles. Right: system with N = 100000 particles.</em></p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- <footer>
+        <p>&copy; 2025 Albert Trullols Puigcerver</p>
+    </footer> -->
+</body>
+</html>
