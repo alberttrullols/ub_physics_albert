@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computational Physics Projects at UB</title>
+    <meta name="description" content="Computational physics projects and simulations in quantum mechanics, statistical physics, and numerical methods">
+    <title>Computational Physics Portfolio | Albert Trullols</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,49 +12,126 @@
             margin: 0;
             padding: 0;
             color: #333;
+            background: linear-gradient(to bottom, #f9f9f9 0%, #f5f5f5 100%);
+            overflow-x: hidden;
         }
         .container {
             width: 65%;
             margin: 0 auto;
             padding: 20px 30px;
             text-align: justify;
+            padding-bottom: 80px; /* Extra padding for footer */
         }
         header {
-            background-color: #005bbb;
+            background: linear-gradient(135deg, #004a9f 0%, #005bbb 50%, #006dd1 100%);
             color: white;
-            padding: 1rem;
+            padding: 1.5rem;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(255,255,255,0.03) 21%, transparent 22%), rgba(0,0,0,0);
+            background-size: 10px 10px;
+            animation: headerPatternMove 120s linear infinite;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        header h1, header p {
+            position: relative;
+            z-index: 1;
+        }
+        header h1 {
+            animation: fadeInDown 1.2s ease-out;
+        }
+        header p {
+            animation: fadeInUp 1.2s ease-out;
         }
         section {
             padding: 20px 0;
             text-align: justify;
-            margin-bottom: 50px;
+            margin-bottom: 25px;
             margin-left: 100px;
             margin-right: 100px;
+            position: relative;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: calc(var(--section-index) * 0.2s);
+        }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         section h2 {
             text-align: center;
+            color: #004a9f;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #004a9f, #00a1ff);
+            border-radius: 2px;
+        }
+        /* Add styling for the h2 title links */
+        section h2 a {
+            color: #004a9f;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        section h2 a:hover {
+            color: #00a1ff;
+        }
+        /* Override the underline effect for h2 links */
+        section h2 a::after {
+            display: none;
         }
         footer {
-            background-color: #333;
+            background: linear-gradient(135deg, #333 0%, #444 100%);
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
             position: fixed;
             bottom: 0;
             width: 100%;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
         .image-container {
             text-align: center;
             margin: 20px 0;
+            overflow: hidden;
         }
         .image-container img {
             max-width: 100%;
             height: auto;
             margin: 10px 0;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 5px;
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
+        .image-container img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         .side-by-side {
             display: flex;
@@ -66,38 +144,115 @@
             height: auto;
             margin: 10px 0;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 5px;
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
+        .side-by-side img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         .video-container {
             text-align: center;
             margin: 20px 0;
+            overflow: hidden;
         }
         .video-container video {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .video-container video:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes headerPatternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 500px 500px; }
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        a:hover {
+            color: #004a9f;
+        }
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #004a9f;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+        a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation delay for sections based on position
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.setProperty('--section-index', index);
+            });
+            
+            // Optional: Intersection Observer for animation when scrolling
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
-        <h1>Computational Physics Projects at UB</h1>
+        <h1>Computational Physics Projects Compilation</h1>
         <p>Albert Trullols Puigcerver</p>
     </header>
     
     <div class="container">
         <section id="about">
-            <p>This page presents a compilation of computational physics projects developed during the BSc program at Universitat de Barcelona. These projects demonstrate various applications of computational methods to solve physics problems. The main repository can be accessed <a href="https://github.com/alberttrullols/ub_physics_albert" target="_blank">here</a>.</p>
+            <p>This portfolio presents a compilation of computational physics projects developed during my BSc program at Universitat de Barcelona. These projects demonstrate various applications of computational methods to solve complex physics problems, from quantum mechanics to thermal systems. The complete source code repository can be accessed <a href="https://github.com/alberttrullols/ub_physics_albert" target="_blank">here</a>.</p>
         </section>
         
         <section id="gaussian-zeno">
-            <h2>Gaussian Zeno Dynamics with Crank-Nicolson Method</h2>
+            <h2><a href="https://alberttrullols.github.io/zeno_content/" target="_blank">Quantum Measurement Paradox: Exploring Zeno Dynamics</a></h2>
             <p>This project explores the quantum Zeno effect using Gaussian measurements and implements numerical solutions with the Crank-Nicolson method. The implementation demonstrates how repeated measurements affect the evolution of quantum systems, providing insights into the interplay between quantum measurement and dynamics.</p>
             
             <p>The Quantum Zeno Effect describes the inhibition of quantum state transitions through frequent measurements, effectively freezing the system's evolution in the limit of continuous observation. Quantum Zeno Dynamics generalizes this concept by restricting the evolution to a specific subspace of the Hilbert space. This work explores these dynamics under repeated position and momentum measurements. Position measurements lead to confinement effects, while momentum measurements give rise to a novel phenomenon: equipotential translocation, wherein the wave packet appears to "jump" between regions of equal potential.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/bsc_thesis_zeno_dynamics/zeno_momentum_snippet.ipynb" target="_blank">click here</a> to see a snippet of the code for this quantum Zeno dynamics simulation.</p>
             
             <div class="video-container">
                 <video controls loop width="100%">
@@ -106,17 +261,17 @@
                 </video>
                 <p><em>Demonstration of quantum wave packet evolution under repeated momentum measurements, showing the equipotential translocation phenomenon.</em></p>
             </div>
-            
-            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/bsc_thesis_zeno_dynamics/zeno_momentum_snippet.ipynb" target="_blank">click here</a> to see a snippet of the code for this quantum Zeno dynamics simulation.</p>
         </section>
         
         <section id="ising-model">
-            <h2>2D Ising Model with Monte Carlo Method</h2>
+            <h2>Phase Transitions Unveiled: Critical Behavior in the Ising Model</h2>
             <p>A simulation of the 2D Ising model is implemented using Monte Carlo methods to study phase transitions in ferromagnetic systems. The simulation allows for visualization of domain formation and calculation of critical parameters.</p>
             
             <p>Statistical analysis is performed to extract meaningful thermodynamic quantities from raw Monte Carlo data. After allowing the system to equilibrate, measurements are taken periodically to reduce autocorrelation effects. For each measurement, the instantaneous energy, magnetization, and their squares are calculated to enable variance calculations. Multiple independent simulations with different random seeds are run to improve statistical reliability.</p>
             
             <p>Data processing involves multiple averaging steps: first over measurement samples within each simulation run, then across all independent runs. All quantities are normalized on a per-particle basis. Energy and magnetization variances, which are proportional to heat capacity and magnetic susceptibility respectively, show characteristic behavior near the critical temperature. These thermodynamic observables allow for detailed analysis of the phase transition behavior.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/ising%20model%20project/FCiTF_Sripts_Figures/MC3.f" target="_blank">click here</a> to see the Fortran code for this Ising model simulation.</p>
             
             <div class="image-container">
                 <img src="content/finite_size_scaling.png" alt="Finite Size Scaling Analysis of the Ising Model">
@@ -125,10 +280,12 @@
         </section>
         
         <section id="gross-pitaevskii">
-            <h2>Gross Pitaevskii Equation with Imaginary Time Method</h2>
+            <h2>Quantum Condensates: Modeling Bose-Einstein States</h2>
             <p>This project presents a numerical framework to investigate quantum many-body physics in Bose-Einstein condensates through solutions of the Gross-Pitaevskii equation. The implementation uses imaginary time propagation to determine ground state wavefunctions across diverse trapping geometries. The solver explores how condensate properties evolve under varying interaction regimes, from weakly interacting gases to strongly nonlinear systems.</p>
             
             <p>The simulation captures quantum effects including matter-wave interference, quantized vortices, and soliton formation. Computational methods ensure numerical stability and accuracy throughout the evolution. Through visualizations of probability densities and phase profiles, the project demonstrates condensate behavior in optical lattices, quantum tunneling across barriers, and the effects of disorder potentials on superfluidity. This approach illuminates fundamental quantum physics principles while providing a platform for modeling quantum technology applications.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/gross%20pitaevskii%20project/GPdef.ipynb" target="_blank">click here</a> to see the Python notebook for this Gross-Pitaevskii equation solver.</p>
             
             <div class="image-container">
                 <div class="side-by-side">
@@ -138,10 +295,58 @@
                 <p><em>Probability density of the Bose-Einstein condensate wavefunction. Left: system with N = 100 particles. Right: system with N = 100000 particles.</em></p>
             </div>
         </section>
+        
+        <section id="monte-carlo-physics">
+            <h2>Monte Carlo Methods: Quantum Calculations in Particle Physics</h2>
+            <p>This project implements advanced Monte Carlo integration techniques to calculate the number of valence quarks inside a proton. By numerically evaluating the probability distributions of up and down quarks through direct sampling methods, the implementation provides precise estimates of these fundamental quantities in quantum chromodynamics. The calculation combines mathematical models of quark distributions with statistical sampling to overcome the challenges of analytical integration.</p>
+            
+            <p>Beyond the primary objective of calculating valence quark numbers, the project explores additional applications of Monte Carlo methods in quantum physics. These include using the accept-reject method for generating custom probability distributions and implementing importance sampling for efficient convergence of complex integrals. Statistical analysis performed at regular intervals monitors convergence and estimates uncertainties, demonstrating how computational methods can provide insights into quantum systems that would be intractable through analytical means alone.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/computational%20physics%20course/exercise%206/P6-22-23.f90" target="_blank">click here</a> to see the code for this Monte Carlo simulation.</p>
+            
+            <div class="image-container">
+                <img src="content/monte_carlo_convergence.png" alt="Monte Carlo Integration Convergence">
+                <p><em>Convergence analysis of Monte Carlo integration for calculating up and down valence quark numbers in a proton, showing error reduction with increasing sample size and approaching the theoretical values.</em></p>
+            </div>
+        </section>
+        
+        <section id="heat-equation">
+            <h2>Heat Equation Solver: Iterative Methods for 2D Diffusion</h2>
+            <p>This project implements a numerical solver for the two-dimensional heat equation on a rectangular domain, comparing three standard iterative methods: Jacobi, Gauss-Seidel, and Successive Over-Relaxation (SOR). The simulation features heterogeneous boundary conditions with different fixed temperatures on each edge and incorporates multiple heat sources: two Gaussian distributions centered at different locations and a constant rectangular source region. The implementation performs comprehensive convergence analysis with various initial temperature conditions, systematically tracking the temperature evolution at key reference points throughout the domain.</p>
+            
+            <p>Using a strict convergence tolerance of 10⁻¹⁰, the code evaluates the efficiency and stability of each numerical method, demonstrating how their mathematical properties affect performance. The program generates complete temperature field visualizations both with and without heat sources, enabling detailed comparison of the iterative approaches and providing insights into heat diffusion phenomena in complex geometries—a foundation for more advanced thermal physics applications.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/computational%20physics%20course/exercise%209/p9martes.f90" target="_blank">click here</a> to see the complete code for this heat equation solver.</p>
+            
+            <div class="image-container">
+                <div class="side-by-side">
+                    <img src="content/heat_with_sources.png" alt="Temperature distribution with heat sources">
+                    <img src="content/heat_with_no_sources.png" alt="Temperature distribution without heat sources">
+                </div>
+                <p><em>Temperature heatmaps of the steady-state solution. Left: System with multiple heat sources. Right: Pure diffusion case with only boundary conditions and no internal heat sources, showing the natural temperature gradient.</em></p>
+            </div>
+        </section>
+        
+        <section id="pendulum-dynamics">
+            <h2>Nonlinear Pendulum Dynamics: Numerical Simulation Methods</h2>
+            <p>This project presents a comprehensive numerical simulation of nonlinear pendulum dynamics implemented in Fortran, utilizing both Euler and Adams-Bashforth methods to solve the governing differential equation. The simulation systematically investigates pendulum behavior across five key regimes: small-angle oscillations where linearization applies, large-angle oscillations near the unstable equilibrium point, energy conservation analysis comparing numerical scheme accuracy, phase-space transitions between oscillatory and rotational motion, and numerical convergence studies with varying time step resolutions.</p>
+            
+            <p>Through meticulous comparison of integration methods, the implementation demonstrates that the Adams-Bashforth algorithm significantly outperforms Euler's method in preserving physical invariants, particularly total energy conservation. The code generates rich visualization datasets that reveal critical physical phenomena including separatrix behavior in phase space and the sensitive dependence on initial conditions near bifurcation points. This numerical framework provides valuable insights into chaotic dynamics and nonlinear systems, serving as an elegant demonstration of how computational methods can illuminate fundamental physics principles beyond analytical solutions.</p>
+            
+            <p>To explore the implementation details, <a href="https://github.com/alberttrullols/ub_physics_albert/blob/main/computational%20physics%20course/exercise%207/P7-22-23.f90" target="_blank">click here</a> to see the Fortran code for this pendulum dynamics simulation.</p>
+                        
+            <div class="image-container">
+                <div class="side-by-side">
+                    <img src="content/small_oscillations.png" alt="Small Angle Oscillations Comparison">
+                    <img src="content/large_oscillations.png" alt="Large Angle Oscillations Comparison">
+                </div>
+                <p><em>Comparison of numerical methods for pendulum angle φ(t). Left: Small oscillations (φ₀ = 0.012 rad) where Adams-Bashforth closely follows the analytical solution while Euler gradually deviates. Right: Large oscillations (φ₀ ≈ π rad) where the methods diverge dramatically, with Euler failing to preserve the system's physical characteristics.</em></p>
+            </div>
+        </section>
     </div>
     
-    <!-- <footer>
-        <p>&copy; 2025 Albert Trullols Puigcerver</p>
-    </footer> -->
+    <footer>
+        <p>&copy; 2023 Albert Trullols Puigcerver | Universitat de Barcelona</p>
+    </footer>
 </body>
 </html>
