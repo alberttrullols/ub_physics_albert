@@ -142,6 +142,7 @@
             border-radius: 8px;
             padding: 5px;
             transition: transform 0.5s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
         .image-container img:hover {
             transform: scale(1.02);
@@ -161,6 +162,7 @@
             border-radius: 8px;
             padding: 5px;
             transition: transform 0.5s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
         .side-by-side img:hover {
             transform: scale(1.02);
@@ -224,6 +226,71 @@
             transform: scaleX(1);
             transform-origin: bottom left;
         }
+        
+        /* Modal styles for image enlargement */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .modal-content.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        /* Caption for modal */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #caption.show {
+            opacity: 1;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -245,6 +312,57 @@
             
             sections.forEach(section => {
                 observer.observe(section);
+            });
+            
+            // Set up modal image functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('enlargedImg');
+            const captionText = document.getElementById('caption');
+            const closeBtn = document.getElementsByClassName('close')[0];
+            
+            // Get all images that should be enlargeable
+            const images = document.querySelectorAll('.image-container img, .side-by-side img');
+            
+            // Add click event to each image
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                    
+                    // Add a slight delay before showing the image for smooth transition
+                    setTimeout(() => {
+                        modalImg.classList.add('show');
+                        captionText.classList.add('show');
+                    }, 100);
+                });
+            });
+            
+            // Close the modal when clicking the × button
+            closeBtn.addEventListener('click', closeModal);
+            
+            // Close the modal when clicking outside the image
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal function
+            function closeModal() {
+                modalImg.classList.remove('show');
+                captionText.classList.remove('show');
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
             });
         });
     </script>
@@ -362,5 +480,12 @@
     <footer>
         <p>&copy; 2025 Albert Trullols Puigcerver | Universitat de Barcelona</p>
     </footer>
+    
+    <!-- Modal for enlarged images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="enlargedImg">
+        <div id="caption"></div>
+    </div>
 </body>
 </html>
